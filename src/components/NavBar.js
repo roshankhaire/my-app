@@ -22,7 +22,7 @@ function ColorSchemesExample(props) {
             <NavLink to="product">
               <button onClick={props. onShowCart}>cart<sup>{noOfCartitems}</sup></button>
             </NavLink>
-            
+            <NavLink to="auth">Login</NavLink>
             </li>
           </Nav>
         </Container>

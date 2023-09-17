@@ -6,6 +6,8 @@ import CartIcon from "./components/pages/CartIcon";
 import Product from "./components/pages/Product";
 import Cart from "./components/Cart/Cart";
 import CartProvider from "./store/CartProvider";
+import AuthForm from "./components/AuthForm";
+
 
 function App() {
   const [cartIaShown,setCartIsShown]=useState(false);
@@ -24,8 +26,10 @@ function App() {
     <Route path="home" element={<Home/>}/>
  
     <Route path="product" element={<Product/>}/>
+    <Route path="auth" element={<AuthForm/>}/>
     </Routes>
     </Router>
+   
      </CartProvider>;
 }
 
