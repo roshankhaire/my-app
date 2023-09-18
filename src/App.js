@@ -7,7 +7,7 @@ import Product from "./components/pages/Product";
 import Cart from "./components/Cart/Cart";
 import CartProvider from "./store/CartProvider";
 import AuthForm from "./components/AuthForm";
-
+import Expense from "./components/pages/Expense";
 
 function App() {
   const [cartIaShown,setCartIsShown]=useState(false);
@@ -27,6 +27,8 @@ function App() {
  
     <Route path="product" element={<Product/>}/>
     <Route path="auth" element={<AuthForm/>}/>
+    <Route path="expense" element={<Expense/>}/>
+    
     </Routes>
     </Router>
    

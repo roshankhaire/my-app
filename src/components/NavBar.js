@@ -4,8 +4,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import { useContext} from 'react';
 import CartContext from '../store/CartContext';
+import AuthContext from '../store/AuthContext';
 function ColorSchemesExample(props) {
-  const cartCtx=useContext(CartContext)
+  const cartCtx=useContext(CartContext);
+const authCtx=useContext(AuthContext)
+  const isLoggedIn=authCtx.isLoggedIn
   let noOfCartitems=cartCtx.items.reduce((curNum,item)=>{
     return curNum + item.amount
   },0)
@@ -19,10 +22,12 @@ function ColorSchemesExample(props) {
             <li>
             <NavLink to="home">Home</NavLink>
             <NavLink to="product">Products</NavLink>
-            <NavLink to="product">
+           { isLoggedIn && <NavLink to="expense">Expense</NavLink>}
+            
               <button onClick={props. onShowCart}>cart<sup>{noOfCartitems}</sup></button>
-            </NavLink>
-            <NavLink to="auth">Login</NavLink>
+           
+           { !isLoggedIn && <NavLink to="auth">Login</NavLink>}
+            
             </li>
           </Nav>
         </Container>
