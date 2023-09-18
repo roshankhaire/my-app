@@ -20,13 +20,13 @@ const authCtx=useContext(AuthContext)
           <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Nav className="me-auto">
             <li>
-            <NavLink to="home">Home</NavLink>
-            <NavLink to="product">Products</NavLink>
-           { isLoggedIn && <NavLink to="expense">Expense</NavLink>}
+            <NavLink to="/home">Home</NavLink>
+            <NavLink to="/product">Products</NavLink>
+           { isLoggedIn && <NavLink to="/expense">Expense</NavLink>}
             
               <button onClick={props. onShowCart}>cart<sup>{noOfCartitems}</sup></button>
            
-           { !isLoggedIn && <NavLink to="auth">Login</NavLink>}
+           { !isLoggedIn && <NavLink to="/auth">Login</NavLink>}
             
             </li>
           </Nav>
