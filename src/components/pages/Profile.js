@@ -1,18 +1,28 @@
 import React from "react";
 import {useRef} from "react"
-
+import GetUserProfile from "./GetUserProfile";
+import axios from "axios"
 const Profile=(props)=>{
     const nameRef=useRef()
     const profilePhotoRef=useRef()
     const submitHandler=(event)=>{
         event.preventDefault();
+       const  name=nameRef.current.value
+        const profilePhoto=profilePhotoRef.current.value
         const userData={
             name:nameRef.current.value,
             profilePhoto:profilePhotoRef.current.value
         }
-        props.onAddUserData(userData)
-
-    }
+        console.log(userData)
+        axios.post("https://crudcrud.com/api/da10399e94fe40cf9e5a042a0882f877/user",userData
+          
+          ).then((response)=>{
+            console.log(response)
+          });
+      
+  
+    }    
+     
    return<>
     <span>Winners never quite,Quitters never win </span>
    <form onSubmit={submitHandler}>
@@ -24,6 +34,7 @@ const Profile=(props)=>{
     <input type="text" ref={profilePhotoRef}/><br/>
     <button>Update</button>
    </form>
+  <GetUserProfile/>
    </>
 }
 export default Profile

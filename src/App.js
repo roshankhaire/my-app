@@ -10,7 +10,7 @@ import AuthForm from "./components/AuthForm";
 import Expense from "./components/pages/Expense";
 import Profile from "./components/pages/Profile";
 
-function App() {
+function App(props) {
   const [cartIaShown,setCartIsShown]=useState(false);
    const showCartHandler=()=>{
        setCartIsShown(true)
@@ -18,21 +18,13 @@ function App() {
    const hideCartHandler=()=>{
             setCartIsShown(false)
   }
-  
-  async function addUserDataHandler(userData){
-  
-    const response=await fetch('https://expensetrackerprofile-default-rtdb.firebaseio.com/ExpenseTrackerUserData.json',{
-         method:'POST',
-         body:JSON.stringify(userData),
-         headers:{
-          'Content-Type':'application/json'
-         }
-    })
-      const data= await response.json();
-      console.log(data)
+
+
+
+      
 
    
-    } 
+    
   return <CartProvider>
 
  { cartIaShown && <Cart onClose={hideCartHandler}/>}
@@ -44,7 +36,7 @@ function App() {
     <Route path="/product" element={<Product/>}/>
     <Route path="/auth" element={<AuthForm/>}/>
     <Route path="/expense" element={<Expense/>}/>
-    <Route path="/profile" element={<Profile onAddUserData={addUserDataHandler}/>}/>
+    <Route path="/profile" element={<Profile />}/>
     
     </Routes>
     </Router>
