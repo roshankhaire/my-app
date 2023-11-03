@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom"
 const AuthForm = () => {
    const navigate=useNavigate()
     const authCtx=useContext(AuthContext)
+    const token=authCtx.token
     const emailInputRef=useRef();
     const passwordInputRef=useRef();
     const confirmPasswordRef=useRef()
@@ -27,10 +28,10 @@ const AuthForm = () => {
         setIsLoading(true);
         let url;
         if(isLogin){
-            url="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBrXKwWCPe_zUc5FVJdPqYgVHyEW9w2Lbw"
+            url="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCjCPhC3SgAux6MAE-cUMEj5nzxy9OPWB8"
         }
         else{
-            url="https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBrXKwWCPe_zUc5FVJdPqYgVHyEW9w2Lbw"
+            url="https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCjCPhC3SgAux6MAE-cUMEj5nzxy9OPWB8"
            }
         fetch(url,{
             method:"POST",
@@ -68,7 +69,7 @@ const AuthForm = () => {
         })
     }
    
-      
+    
 
     return (
         <section className={classes.auth}>
@@ -93,6 +94,7 @@ const AuthForm = () => {
                         {isLogin ? 'Create new account' : 'Login with existing account'}</button>
                 </div>
             </form>
+           
         </section>
     )
 }
