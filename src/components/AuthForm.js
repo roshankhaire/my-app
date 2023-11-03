@@ -3,7 +3,7 @@ import classes from "./AuthForm.module.css"
 import { useContext } from "react";
 import AuthContext from "../store/AuthContext";
 import {useNavigate} from "react-router-dom"
-
+import { NavLink } from "react-router-dom";
 const AuthForm = () => {
    const navigate=useNavigate()
     const authCtx=useContext(AuthContext)
@@ -90,10 +90,15 @@ const AuthForm = () => {
                 <div className={classes.actions}>
                   { !isLoading  && <button> {isLogin ? 'Login' : 'Create account'}</button>}
                   {isLoading && <p>sending request...</p>}
+                 
                     <button className={classes.toggle} onClick={switchAuthModeHandler}>
                         {isLogin ? 'Create new account' : 'Login with existing account'}</button>
                 </div>
+              
             </form>
+            <NavLink to="/forgotPassword">
+           <button>forgotPassword</button>
+           </NavLink>
            
         </section>
     )
