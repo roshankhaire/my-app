@@ -10,6 +10,7 @@ import AuthForm from "./components/AuthForm";
 import Expense from "./components/pages/Expense";
 import Profile from "./components/pages/Profile";
 import ForgotPassword from "./components/pages/ForgotPassword";
+import DailyExpenses from "./components/pages/DailyExpenses";
 function App(props) {
   const [cartIaShown,setCartIsShown]=useState(false);
    const showCartHandler=()=>{
@@ -38,6 +39,7 @@ function App(props) {
     <Route path="/expense" element={<Expense/>}/>
     <Route path="/profile" element={<Profile />}/>
     <Route path="/forgotPassword" element={<ForgotPassword/>}/>
+    <Route path="/dailyExpenses" element={<DailyExpenses />}/>
     
     </Routes>
     </Router>

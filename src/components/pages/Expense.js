@@ -33,6 +33,9 @@ const Expense=(props)=>{
            </NavLink>
         </div>
         <button onClick={emailVerification}>Email Verification</button>
+        <NavLink to="/dailyExpenses">
+           <button>Daily Expenses</button>
+           </NavLink>
         </>
     )
 }
