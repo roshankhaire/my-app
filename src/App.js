@@ -12,6 +12,7 @@ import Profile from "./components/pages/Profile";
 import ForgotPassword from "./components/pages/ForgotPassword";
 import DailyExpenses from "./components/pages/DailyExpenses";
 function App(props) {
+
   const [cartIaShown,setCartIsShown]=useState(false);
    const showCartHandler=()=>{
        setCartIsShown(true)
