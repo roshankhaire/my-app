@@ -1,29 +1,33 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios"
-import GetDailyExpense from "./GetDailyExpense";
+import { useNavigate } from "react-router-dom";
 const DailyExpenses=()=>{
- 
-    const data={money:"",discription:"",category:""}
-    const [inputData,setInputData]=useState(data)
-      const dataHandler=(event)=>{
-       
-        setInputData({...inputData,[event.target.name]:event.target.value})
-       
+        const navigate=useNavigate()
+         const [money,setMoney]=useState("");
+         const [discription,setDiscription]=useState("")
+         const [category,setCategory]=useState("")
+        const expenseObject={
+          money:money,
+          discription:discription,
+          category:category
 
-      }
-     
-               
-               const submitHandler=(event)=>{
-                   event.preventDefault()
-                   axios.post("https://crudcrud.com/api/0696377f8ea24503b41000369ac775ff/exprnseObject",inputData
+        }
+        console.log(expenseObject)
+     const submitHandler=(e)=>{
+           e.preventDefault();
+           console.log("Clicked")
+           axios.post( 'https://654c394977200d6ba858a111.mockapi.io/expensePost/Post',
+              
+             expenseObject,
+           
+
+           )
+           .then(()=>{
+            navigate("/getDailyExpense")
+           })
           
-                   ).then((response)=>{
-                     console.log(response)
-                   });
-               
-               }
-
+     }
                
               
 
@@ -31,22 +35,34 @@ const DailyExpenses=()=>{
       
       return(
         <>
-        <form onSubmit={submitHandler}>
-            <h3>DailyExpenses</h3>
-          <label >Enter Money</label>
-            <input type="money" name="money" value={inputData.money} onChange={dataHandler}/><br/>
-            <label >Add Discription</label>
-            <input type="discription" name="discription"  value={inputData.discription} onChange={dataHandler}/><br/>
-            <label >Choose Category</label>
-            <select  name="category" value={inputData.category} onChange={dataHandler} >
+       <h1>Daily Expenses</h1>
+       <form>
+  <div >
+    <label htmlFor="money" className="form-label">Email Money</label>
+    <input type="money" className="form-control" id="exampleInputMoney" aria-describedby="MoneyHelp"
+    onChange={(e)=>setMoney(e.target.value)}/>
+   
+  </div>
+  <div >
+    <label htmlFor="discription" className="form-label">Enter Discription</label>
+    <input type="discription" className="form-control" id="exampleInputDiscription"
+     onChange={(e)=>setDiscription(e.target.value)}/>
+  </div>
+
+  
+  <label >Choose Category</label>
+            <select  name="category"  onChange={(e)=>setCategory(e.target.value)}>
                <option value="food">Food</option>
                <option value="petrol">Petrol</option>
                <option value="salary">Salary</option>
-
-            </select>
-            <button >Add Expense</button>
-           </form>
-           <GetDailyExpense/>
+               </select>
+        
+             
+  <button type="submit" className="btn btn-primary" onClick={submitHandler}>Submit</button>
+</form>
+           
+          
+          
            </>
       )
 }

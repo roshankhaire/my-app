@@ -2,6 +2,7 @@ import React from "react";
 import {NavLink} from "react-router-dom"
 import AuthContext from "../../store/AuthContext";
 import { useContext } from "react";
+import ExpensePost from "../ExpenseProject/ExpensePost";
 const Expense=(props)=>{
     const authCtx=useContext(AuthContext)
     const token=authCtx.token;
@@ -34,7 +35,7 @@ const Expense=(props)=>{
         </div>
         <button onClick={emailVerification}>Email Verification</button>
         <NavLink to="/dailyExpenses">
-           <button>Daily Expenses</button>
+           <ExpensePost/>
            </NavLink>
         </>
     )

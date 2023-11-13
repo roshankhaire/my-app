@@ -1,31 +1,84 @@
-import React ,{useState}from "react";
-import { useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 const GetDailyExpense=(props)=>{
-   const [userData,setUserData]=useState([])
-  useEffect(()=>{
-   axios.get("https://crudcrud.com/api/0696377f8ea24503b41000369ac775ff/exprnseObject")
-   .then((response)=>{
-      console.log(response)
-      setUserData(response.data)
-   })
-  },[])
-        
+   const [data,setData]=useState([])
+   function getData(){
+      axios.get('https://654c394977200d6ba858a111.mockapi.io/expensePost/Post')
+      .then((res)=>{
+         console.log(res.data);
+         setData(res.data)
+      })
+   }
+   const deleteHandler=(id)=>{
+      console.log("this is delete Handler",id)
+      axios.delete(`https://654c394977200d6ba858a111.mockapi.io/expensePost/Post/${id}`)
+      .then(()=>{
+         getData()
+      })
+   }
+   const setToLocalStorage=(id,money,discription,category)=>{
+      localStorage.setItem("id",id)
+      localStorage.setItem("money",money)
+      localStorage.setItem("discription",discription)
+      localStorage.setItem("category",category)
+
+   }
+   useEffect(()=>{
+      getData()
+   },[])
  
-  
-     return(
-        <>
-     
+   return(
+      <>
+      <h2>Expense Tracker</h2>
       
-       {userData.map((data)=>{
-               return<div>
-                  
-                  <h3>Money: {data.money} </h3> 
-                  <h3> Discription:{data.discription} </h3> 
-                  <h3> Category:{data.category} </h3> 
-               </div>
-       })}
-        </>
-     )
+      <table className="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Money</th>
+      <th scope="col">Description</th>
+      <th scope="col">category</th>
+     
+    </tr>
+  </thead>
+       {
+         data.map((eachData)=>{
+             return(
+               <tbody>
+               <tr>
+                 <th scope="row">{eachData.id}</th>
+                 <td>{eachData.money}</td>
+                 <td>{eachData.discription}</td>
+                 <td>{eachData.category}</td>
+                 <td>
+                  <NavLink to="/editDailyExpense">
+                  <button className="btn-success" onClick={()=>setToLocalStorage(
+                      eachData.id,
+                      eachData.money,
+                      eachData.discription,
+                      eachData.category
+                  )}>Edit</button>
+                  </NavLink>
+                   
+                 </td>
+                 <td>
+                    <button className="btn-danger" onClick={()=>{deleteHandler(eachData.id)}}>Delete</button>
+                 </td>
+                 
+               </tr>
+              
+               
+             </tbody>
+             )
+         })
+         
+    }
+</table>
+   
+ 
+
+      </>
+   )
 }
 export default GetDailyExpense
