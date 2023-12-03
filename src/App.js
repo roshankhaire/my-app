@@ -13,6 +13,7 @@ import ForgotPassword from "./components/pages/ForgotPassword";
 import DailyExpenses from "./components/pages/DailyExpenses";
 import GetDailyExpense from "./components/pages/GetDailyExpense";
 import EditDailyExpense from "./components/pages/EditDailyExpense";
+import Premium from "./components/pages/Premium";
 function App(props) {
 
   const [cartIaShown,setCartIsShown]=useState(false);
@@ -45,6 +46,7 @@ function App(props) {
     <Route path="/dailyExpenses" element={<DailyExpenses />}/>
     <Route path="/getDailyExpense" element={<GetDailyExpense/>}/>
     <Route path="/editDailyExpense" element={<EditDailyExpense/>}/>
+    <Route path="/premium" element={<Premium/>}/>
     
     </Routes>
     </Router>

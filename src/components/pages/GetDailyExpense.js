@@ -3,13 +3,23 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 const GetDailyExpense=(props)=>{
    const [data,setData]=useState([])
+
+   let premium=localStorage.getItem("money")
+  premium=premium+localStorage.getItem("money")
+   console.log(premium)
+  
    function getData(){
-      axios.get('https://654c394977200d6ba858a111.mockapi.io/expensePost/Post')
-      .then((res)=>{
-         console.log(res.data);
-         setData(res.data)
-      })
+         
+         axios.get('https://654c394977200d6ba858a111.mockapi.io/expensePost/Post')
+         .then((res)=>{
+            console.log(res.data);
+            setData(res.data)
+         })
+
+      
+   
    }
+ 
    const deleteHandler=(id)=>{
       console.log("this is delete Handler",id)
       axios.delete(`https://654c394977200d6ba858a111.mockapi.io/expensePost/Post/${id}`)
@@ -27,6 +37,9 @@ const GetDailyExpense=(props)=>{
    useEffect(()=>{
       getData()
    },[])
+   const showPremium=()=>{
+             console.log("premium")
+   }
  
    return(
       <>
@@ -79,7 +92,13 @@ const GetDailyExpense=(props)=>{
    
  
 <div>
-    <h1>Your Daily Expense is {data.map((eachData)=>{return eachData.money})} </h1> 
+   
+    {premium >10000 && <h1>Your Daily Expense is {data.map((eachData)=>{return eachData.money})} Rs.
+     </h1>}
+   <NavLink to="/premium"> 
+   <button onClick={showPremium}>Activate Premium</button> </NavLink> 
+    {premium <10000 && <h1>Your Daily Expense is {data.map((eachData)=>{return eachData.money})} Rs.
+       </h1> }
 </div>
       </>
    )

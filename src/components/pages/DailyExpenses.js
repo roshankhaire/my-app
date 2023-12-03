@@ -14,6 +14,8 @@ const DailyExpenses=()=>{
 
         }
         console.log(expenseObject)
+     
+       //setToLocalStorage()
      const submitHandler=(e)=>{
            e.preventDefault();
            console.log("Clicked")

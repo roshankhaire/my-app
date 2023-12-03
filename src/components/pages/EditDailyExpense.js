@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-const EditDailyExpense=()=>{
+const EditDailyExpense=(props)=>{
     const navigate=useNavigate()
     const [id,setId]=useState(0)
     const [money,setMoney]=useState("")
@@ -13,6 +13,13 @@ const EditDailyExpense=()=>{
         category:category
 
       }
+      const setToLocalStorage=(id,money,discription,category)=>{
+        localStorage.setItem("id",id)
+        localStorage.setItem("money",money)
+        localStorage.setItem("discription",discription)
+        localStorage.setItem("category",category)
+  
+     }
     useEffect(()=>{
            setId(localStorage.getItem("id"))
            setMoney(localStorage.getItem("money"))
