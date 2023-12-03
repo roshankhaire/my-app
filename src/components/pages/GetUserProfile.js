@@ -4,7 +4,7 @@ import axios from "axios";
 const GetUserProfile=(props)=>{
    const [userData,setUserData]=useState([])
   useEffect(()=>{
-   axios.get("https://crudcrud.com/api/9ee78f1e389e4227bc1b3227e0b358ec/user")
+   axios.get("https://crudcrud.com/api/5873bdd31e81462dae0924f3726b3ff6/user")
    .then((response)=>{
       console.log(response)
       setUserData(response.data)

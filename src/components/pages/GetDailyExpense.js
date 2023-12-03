@@ -70,6 +70,7 @@ const GetDailyExpense=(props)=>{
               
                
              </tbody>
+             
              )
          })
          
@@ -77,7 +78,9 @@ const GetDailyExpense=(props)=>{
 </table>
    
  
-
+<div>
+    <h1>Your Daily Expense is {data.map((eachData)=>{return eachData.money})} </h1> 
+</div>
       </>
    )
 }

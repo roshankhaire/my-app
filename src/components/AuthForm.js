@@ -1,19 +1,30 @@
 import React, {useState,useRef} from "react";
 import classes from "./AuthForm.module.css"
-import { useContext } from "react";
-import AuthContext from "../store/AuthContext";
+//import { useContext } from "react";
+//import AuthContext from "../store/AuthContext";
+//import { UseSelector } from "@reduxjs/toolkit";
 import {useNavigate} from "react-router-dom"
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { authActions } from "../reduxStore/auth";
+
 const AuthForm = () => {
-   const navigate=useNavigate()
-    const authCtx=useContext(AuthContext)
-    const token=authCtx.token
+      const isLoggedIn=useSelector(state=>state.isLoggedIn)
+    //const dispatch=useDispatch()
+  const navigate=useNavigate()
+   // const authCtx=useContext(AuthContext)
+   // const token=authCtx.token
     const emailInputRef=useRef();
     const passwordInputRef=useRef();
     const confirmPasswordRef=useRef()
    
-    const [isLogin, setIsLogin] = useState(true);
-    const [isLoading,setIsLoading]=useState(false)
+     const [isLogin, setIsLogin] = useState(true);
+    const [isLoading,setIsLoading]=useState(false);
+    // const [email,setEmail]=useState("")
+    //const [password,setPassword]=useState("")
+    //const [cPassword,setCPassword]=useState("")
+    const dispatch=useDispatch()
 
     const switchAuthModeHandler = (event) => {
         event.preventDefault()
@@ -22,16 +33,21 @@ const AuthForm = () => {
     };
     const submitHandler=(event)=>{
             event.preventDefault();
-        const enteredEmail=emailInputRef.current.value;
+       
+           
+         const enteredEmail=emailInputRef.current.value;
         const enteredPassword=passwordInputRef.current.value;
         const enteredConfirmPassword=confirmPasswordRef.current.value;
+       
         setIsLoading(true);
         let url;
-        if(isLogin){
-            url="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCjCPhC3SgAux6MAE-cUMEj5nzxy9OPWB8"
+        if(isLoggedIn){
+            url="https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBrXKwWCPe_zUc5FVJdPqYgVHyEW9w2Lbw"
         }
         else{
-            url="https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCjCPhC3SgAux6MAE-cUMEj5nzxy9OPWB8"
+            url="https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBrXKwWCPe_zUc5FVJdPqYgVHyEW9w2Lbw"
+         
+          
            }
         fetch(url,{
             method:"POST",
@@ -60,13 +76,15 @@ const AuthForm = () => {
    
           
         }).then((data)=>{
-           // console.log(data)
+            console.log(data)
             //console.log(data.idToken)
-            authCtx.login(data.idToken)
-           navigate("/expense")
+           // authCtx.login(data.idToken)
+              dispatch(authActions.login(data.idToken))
+               navigate("/expense")
         }).catch((err)=>{
             alert(err.message)
         })
+        
     }
    
     
@@ -85,7 +103,8 @@ const AuthForm = () => {
                 </div>
                 <div className={classes.control}>
                    
-                    <input type="password" id="confirmpassword" required placeholder="confirmpassword" ref={confirmPasswordRef}/>
+                    <input type="password" id="confirmpassword" required placeholder="confirmpassword"
+                    ref={confirmPasswordRef}/>
                 </div>
                 <div className={classes.actions}>
                   { !isLoading  && <button> {isLogin ? 'Login' : 'Create account'}</button>}
